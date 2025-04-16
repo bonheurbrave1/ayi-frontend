@@ -23,7 +23,7 @@ import WalletPage from "./pages/WalletPage";
 // PrivateRoute component for protected routes
 const PrivateRoute = ({ element }) => {
   // Check if the user is logged in by verifying the token in localStorage
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   // If no token is found, redirect to the login page
   if (!token) {
@@ -43,24 +43,57 @@ function App() {
             {/* Public Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<RegistrationPage />} />
-            
+
             {/* Private Routes (Protected by PrivateRoute component) */}
             <Route path="/" element={<PrivateRoute element={<Homepage />} />} />
-            <Route path="/account-page" element={<PrivateRoute element={<AccountPage />} />} />
-            <Route path="/ayi-chat-room" element={<PrivateRoute element={<ChatRoom />} />} />
-            <Route path="/ayi-community" element={<PrivateRoute element={<CommunityPage />} />}>
-              <Route path="feeds" element={<PrivateRoute element={<FeedPage />} />} />
-              <Route path="posts" element={<PrivateRoute element={<PostManagementPage />} />} />
-              <Route path="messages" element={<PrivateRoute element={<Messages />} />} />
-              <Route path="members" element={<PrivateRoute element={<Members />} />} />
-              <Route path="announcements" element={<PrivateRoute element={<Announcement />} />} />
-              <Route path="creategroup" element={<PrivateRoute element={<CreateGroup />} />} />
-              <Route path="getvip" element={<PrivateRoute element={<GetVip />} />} />
-              <Route path="settings" element={<PrivateRoute element={<Settings />} />} />
+            <Route
+              path="/account-page"
+              element={<PrivateRoute element={<AccountPage />} />}
+            />
+            <Route
+              path="/ayi-chat-room"
+              element={<PrivateRoute element={<ChatRoom />} />}
+            />
+            <Route
+              path="/ayi-community"
+              element={<PrivateRoute element={<CommunityPage />} />}
+            >
+              <Route
+                path="feeds"
+                element={<PrivateRoute element={<FeedPage />} />}
+              />
+              <Route
+                path="posts"
+                element={<PrivateRoute element={<PostManagementPage />} />}
+              />
+              <Route
+                path="messages"
+                element={<PrivateRoute element={<Messages />} />}
+              />
+              <Route
+                path="members"
+                element={<PrivateRoute element={<Members />} />}
+              />
+              <Route
+                path="announcements"
+                element={<PrivateRoute element={<Announcement />} />}
+              />
+              <Route
+                path="creategroup"
+                element={<PrivateRoute element={<CreateGroup />} />}
+              />
+              <Route
+                path="getvip"
+                element={<PrivateRoute element={<GetVip />} />}
+              />
+              <Route
+                path="settings"
+                element={<PrivateRoute element={<Settings />} />}
+              />
             </Route>
             <Route path="/ayi-wallet">
-              <Route path="wallet-login" element={<WalletLogin />}/>
-              <Route path="wallet" element={<WalletPage />}/>
+              <Route path="wallet-login" element={<WalletLogin />} />
+              <Route path="wallet" element={<WalletPage />} />
             </Route>
 
             {/* Catch-all Route */}

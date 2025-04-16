@@ -17,10 +17,10 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/user/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:5000/api/user/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
@@ -28,9 +28,9 @@ const Login = () => {
       const data = await response.json();
       if (response.status === 200) {
         // Save token to localStorage
-        localStorage.setItem('token', data.token);
+        localStorage.setItem("token", data.token);
         // Redirect to profile or dashboard after successful login
-        navigate('/profile');  // Redirect to the profile page or any page you want
+        navigate("/profile"); // Redirect to the profile page or any page you want
       } else {
         setErrorMessage(data.message);
       }
@@ -51,7 +51,7 @@ const Login = () => {
       <div className="flex flex-col items-center justify-center w-full sm:w-1/2 p-6 bg-white text-black rounded-l-xl shadow-2xl relative">
         {/* Logo */}
         <div className="absolute top-4 left-4">
-          <a href={'/'}>
+          <a href={"/"}>
             <img src={logo} alt="AYI Group Logo" className="w-20 h-auto" />
           </a>
         </div>

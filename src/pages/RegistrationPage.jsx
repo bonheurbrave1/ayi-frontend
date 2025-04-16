@@ -36,7 +36,7 @@ const RegistrationPage = () => {
 
     try {
       // Send registration data to backend
-      const response = await axios.post('/api/user/register', {
+      const response = await axios.post("/api/user/register", {
         names: fullnames,
         email,
         phone,
@@ -96,7 +96,10 @@ const RegistrationPage = () => {
           <form onSubmit={handleSubmit}>
             {/* Fullname */}
             <div className="mb-4">
-              <label htmlFor="fullnames" className="block text-sm text-gray-700 font-semibold">
+              <label
+                htmlFor="fullnames"
+                className="block text-sm text-gray-700 font-semibold"
+              >
                 Fullnames
               </label>
               <div className="relative mt-2">
@@ -114,7 +117,10 @@ const RegistrationPage = () => {
 
             {/* Email */}
             <div className="mb-4">
-              <label htmlFor="email" className="block text-sm text-gray-700 font-semibold">
+              <label
+                htmlFor="email"
+                className="block text-sm text-gray-700 font-semibold"
+              >
                 Email
               </label>
               <div className="relative mt-2">
@@ -132,7 +138,10 @@ const RegistrationPage = () => {
 
             {/* Phone */}
             <div className="mb-4">
-              <label htmlFor="phone" className="block text-sm text-gray-700 font-semibold">
+              <label
+                htmlFor="phone"
+                className="block text-sm text-gray-700 font-semibold"
+              >
                 Phone Number
               </label>
               <div className="relative mt-2">
@@ -150,7 +159,10 @@ const RegistrationPage = () => {
 
             {/* Location */}
             <div className="mb-4">
-              <label htmlFor="location" className="block text-sm text-gray-700 font-semibold">
+              <label
+                htmlFor="location"
+                className="block text-sm text-gray-700 font-semibold"
+              >
                 Location
               </label>
               <input
@@ -165,7 +177,10 @@ const RegistrationPage = () => {
 
             {/* Date of Birth */}
             <div className="mb-4">
-              <label htmlFor="bd" className="block text-sm text-gray-700 font-semibold">
+              <label
+                htmlFor="bd"
+                className="block text-sm text-gray-700 font-semibold"
+              >
                 Date of Birth
               </label>
               <input
@@ -179,7 +194,10 @@ const RegistrationPage = () => {
 
             {/* National ID */}
             <div className="mb-4">
-              <label htmlFor="nationalId" className="block text-sm text-gray-700 font-semibold">
+              <label
+                htmlFor="nationalId"
+                className="block text-sm text-gray-700 font-semibold"
+              >
                 National ID
               </label>
               <input
@@ -194,7 +212,10 @@ const RegistrationPage = () => {
 
             {/* Password */}
             <div className="mb-4">
-              <label htmlFor="password" className="block text-sm text-gray-700 font-semibold">
+              <label
+                htmlFor="password"
+                className="block text-sm text-gray-700 font-semibold"
+              >
                 Password
               </label>
               <input
@@ -209,7 +230,10 @@ const RegistrationPage = () => {
 
             {/* Confirm Password */}
             <div className="mb-4">
-              <label htmlFor="confirmPassword" className="block text-sm text-gray-700 font-semibold">
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm text-gray-700 font-semibold"
+              >
                 Confirm Password
               </label>
               <input

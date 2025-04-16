@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { FaUserCog, FaLock, FaEnvelope, FaLanguage, FaRegHandPointUp } from "react-icons/fa"; // Icons
+import {
+  FaUserCog,
+  FaLock,
+  FaEnvelope,
+  FaLanguage,
+  FaRegHandPointUp,
+} from "react-icons/fa"; // Icons
 import { FaExchangeAlt } from "react-icons/fa";
-
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar"; // Assuming Navbar component exists
-import { Link } from "react-router-dom"; // For navigation if needed
+import { Link, useNavigate } from "react-router-dom"; // For navigation if needed
+
 
 const Settings = () => {
+  const goto = useNavigate();
   const [darkMode, setDarkMode] = useState(false); // Dark mode toggle (default is false)
 
   // Handle dark mode toggle
@@ -20,12 +27,20 @@ const Settings = () => {
   };
 
   return (
-    <div className={`font-sans ${darkMode ? 'bg-gray-800 text-white' : 'bg-gray-100 text-black'} min-h-screen`}>
+    <div
+      className={`font-sans ${
+        darkMode ? "bg-gray-800 text-white" : "bg-gray-100 text-black"
+      } min-h-screen`}
+    >
       <div className="container mx-auto px-6 py-12">
         <h2 className="text-3xl font-semibold text-center mb-10">Settings</h2>
 
         {/* Account Settings Section */}
-        <div className={`bg-white ${darkMode ? 'dark:bg-gray-700' : 'bg-white'} shadow-lg rounded-lg p-6 mb-8`}>
+        <div
+          className={`bg-white ${
+            darkMode ? "dark:bg-gray-700" : "bg-white"
+          } shadow-lg rounded-lg p-6 mb-8`}
+        >
           <h3 className="text-xl font-semibold mb-4 flex items-center">
             <FaUserCog className="mr-3 text-blue-600" /> Account Settings
           </h3>
@@ -51,7 +66,11 @@ const Settings = () => {
         </div>
 
         {/* Security Settings Section */}
-        <div className={`bg-white ${darkMode ? 'dark:bg-gray-700' : 'bg-white'} shadow-lg rounded-lg p-6 mb-8`}>
+        <div
+          className={`bg-white ${
+            darkMode ? "dark:bg-gray-700" : "bg-white"
+          } shadow-lg rounded-lg p-6 mb-8`}
+        >
           <h3 className="text-xl font-semibold mb-4 flex items-center">
             <FaLock className="mr-3 text-red-600" /> Security Settings
           </h3>
@@ -71,7 +90,11 @@ const Settings = () => {
         </div>
 
         {/* Language Settings Section */}
-        <div className={`bg-white ${darkMode ? 'dark:bg-gray-700' : 'bg-white'} shadow-lg rounded-lg p-6 mb-8`}>
+        <div
+          className={`bg-white ${
+            darkMode ? "dark:bg-gray-700" : "bg-white"
+          } shadow-lg rounded-lg p-6 mb-8`}
+        >
           <h3 className="text-xl font-semibold mb-4 flex items-center">
             <FaLanguage className="mr-3 text-yellow-600" /> Language Settings
           </h3>
@@ -94,7 +117,11 @@ const Settings = () => {
         </div>
 
         {/* Dark Mode Toggle Section */}
-        <div className={`bg-white ${darkMode ? 'dark:bg-gray-700' : 'bg-white'} shadow-lg rounded-lg p-6 mb-8`}>
+        <div
+          className={`bg-white ${
+            darkMode ? "dark:bg-gray-700" : "bg-white"
+          } shadow-lg rounded-lg p-6 mb-8`}
+        >
           <h3 className="text-xl font-semibold mb-4 flex items-center">
             <FaRegHandPointUp className="mr-3 text-green-600" /> Appearance
           </h3>
@@ -117,7 +144,9 @@ const Settings = () => {
             <div className="flex justify-between items-center">
               <p className="text-lg">Logout</p>
               <button
-                onClick={() => { alert("Logged out") }}
+                onClick={() => {
+                  goto("/account-page")
+                }}
                 className="bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-yellow-700"
               >
                 Logout

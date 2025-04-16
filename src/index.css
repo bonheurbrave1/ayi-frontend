@@ -1,29 +1,27 @@
 @import "tailwindcss";
 
-*{
-    font-weight:3000;
+* {
+  font-weight: 3000;
 }
 
-.hero{
-    background-image:url("./assets/login/back4.jpg")
+.hero {
+  background-image: url("./assets/login/back4.jpg");
 }
 
+.navbar {
+  border-bottom: 1px solid green;
+}
+.navbarr {
+  border-bottom: 1px solid blue;
+}
+.offer {
+  font-size: 14px;
 
-.navbar{
-    border-bottom : 1px solid green; 
+  font-family: "Comic sans Ms";
 }
-.navbarr{
-    border-bottom:1px solid blue;
-
+.airtel {
+  background-image: url("../src/assets/airtel.png");
 }
-.offer{
-    font-size:14px;
-    
-    font-family:"Comic sans Ms"
-}
-.airtel{
-    background-image: url('../src/assets/airtel.png');
-}
-.mtn{
-    background-image: url('../src/assets/momo.jpeg');
+.mtn {
+  background-image: url("../src/assets/momo.jpeg");
 }
