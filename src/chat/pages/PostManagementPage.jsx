@@ -1,22 +1,75 @@
-import React, { useState } from "react";
-import { FaTrashAlt } from "react-icons/fa"; // Importing React Icons for the trash icon
-import { motion } from "framer-motion"; // For smooth animations
+import React, { useState, useEffect } from "react";
+import { FaTrashAlt } from "react-icons/fa";
+import { motion } from "framer-motion";
+import axios from "axios";
 
 function PostManagementPage() {
   const [newPostDescription, setNewPostDescription] = useState("");
   const [newPostImage, setNewPostImage] = useState(null);
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      description: "First post description",
-      image: "https://via.placeholder.com/150",
-    },
-    {
-      id: 2,
-      description: "Second post description",
-      image: "https://via.placeholder.com/150",
-    },
-  ]);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [posts, setPosts] = useState([]);
+
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    if (userId) {
+      fetchPosts();
+    } else {
+      console.warn("User ID not found in localStorage");
+    }
+  }, [userId]);
+
+  const fetchPosts = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/posts");
+      const myPosts = res.data.posts.filter(
+        (post) => post.user?._id === userId
+      );
+      setPosts(myPosts);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setNewPostImage(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
+
+  const handleCreatePost = async () => {
+    if (!userId) return alert("User not authenticated. Please log in.");
+    if (!newPostDescription.trim()) return alert("Please enter a description");
+
+    const formData = new FormData();
+    formData.append("user", userId);
+    formData.append("content", newPostDescription);
+    if (newPostImage) formData.append("image", newPostImage);
+
+    try {
+      const res = await axios.post("http://localhost:5000/api/posts", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      setPosts([res.data.post, ...posts]);
+      setNewPostDescription("");
+      setNewPostImage(null);
+      setImagePreview(null);
+    } catch (error) {
+      console.error("Error creating post:", error.response?.data || error.message);
+      alert("Failed to create post.");
+    }
+  };
+
+  const handleDeletePost = async (postId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/posts/${postId}`);
+      setPosts(posts.filter((post) => post._id !== postId));
+    } catch (error) {
+      console.error("Error deleting post:", error.response?.data || error.message);
+      alert("Failed to delete post. Please try again.");
+    }
+  };
 
   return (
     <div className="container mx-auto px-6 py-12">
@@ -42,42 +95,49 @@ function PostManagementPage() {
           type="file"
           id="file"
           accept="image/*"
-          className="block w-full mb-4"
-          onChange={(e) =>
-            setNewPostImage(URL.createObjectURL(e.target.files[0]))
-          }
+          onChange={handleImageChange}
         />
-        <label htmlFor="file" className=" py-2 rounded-md text-center bg-slate-300 font-bold block w-1/4" >Select File</label>
-        <button className="bg-blue-500 w-full text-white mt-2 py-2 px-6 rounded-md  hover:bg-blue-600 transition duration-300">
+        <label
+          htmlFor="file"
+          className="py-2 rounded-md text-center bg-slate-300 font-bold block w-1/4 cursor-pointer"
+        >
+          Select File
+        </label>
+        {imagePreview && (
+          <img
+            src={imagePreview}
+            alt="Preview"
+            className="w-full h-64 object-cover mt-4 rounded-md"
+          />
+        )}
+        <button
+          className="bg-blue-500 w-full text-white mt-2 py-2 px-6 rounded-md hover:bg-blue-600 transition duration-300"
+          onClick={handleCreatePost}
+        >
           Create Post
         </button>
       </motion.div>
 
-      {/* Displaying Existing Posts */}
+      {/* Display User's Posts */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl font-semibold text-gray-800 mb-4">
-          Your Posts
-        </h2>
-
+        <h2 className="text-3xl font-semibold text-gray-800 mb-4">Your Posts</h2>
         {posts.length === 0 ? (
-          <p className="text-gray-500">
-            No posts available. Create your first post!
-          </p>
+          <p className="text-gray-500">No posts available. Create your first post!</p>
         ) : (
           posts.map((post) => (
             <motion.div
-              key={post.id}
+              key={post._id}
               className="bg-white p-6 mb-4 rounded-lg shadow-lg"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
             >
               <div className="post-content mb-4">
-                <p className="text-gray-700 text-lg mb-2">{post.description}</p>
+                <p className="text-gray-700 text-lg mb-2">{post.content}</p>
                 {post.image && (
                   <img
                     src={post.image}
@@ -89,9 +149,7 @@ function PostManagementPage() {
               <div className="flex justify-end">
                 <button
                   className="text-red-500 hover:text-red-600 flex items-center space-x-2"
-                  onClick={() =>
-                    setPosts(posts.filter((p) => p.id !== post.id))
-                  } // Example delete functionality
+                  onClick={() => handleDeletePost(post._id)}
                 >
                   <FaTrashAlt />
                   <span>Delete Post</span>

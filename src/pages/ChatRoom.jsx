@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 import {
   auth,
@@ -8,17 +8,41 @@ import {
   onSnapshot,
   query,
   orderBy,
+  storage, // 👈 Add this if not yet imported
 } from "./firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
-import { FaGoogle } from "react-icons/fa";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"; // 👈 Storage methods
 import googleimage from "../assets/google.png";
 import { motion } from "framer-motion";
 import logo from "../assets/logo.png";
+import EmojiPicker from "emoji-picker-react";
 
 function ChatRoom() {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const emojiPickerRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  // Emoji click
+  const handleEmojiClick = (emojiData) => {
+    setMessage((prevMessage) => prevMessage + emojiData.emoji);
+  };
+
+  // Close picker when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(event.target)
+      ) {
+        setShowEmojiPicker(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // Login with Google
   const login = () => {
@@ -34,22 +58,43 @@ function ChatRoom() {
     });
   };
 
-  // Handle message sending
+  // Send text message
   const sendMessage = async (e) => {
     e.preventDefault();
-    if (message.trim() !== "") {
-      await addDoc(messagesRef, {
-        text: message,
-        uid: user.uid,
-        displayName: user.displayName,
-        photoURL: user.photoURL,
-        timestamp: new Date(),
-      });
-      setMessage("");
-    }
+    if (message.trim() === "") return;
+
+    await addDoc(messagesRef, {
+      text: message.trim(),
+      uid: user.uid,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      timestamp: new Date(),
+    });
+
+    setMessage("");
   };
 
-  // Real-time message updates
+  // Upload and send file
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const fileRef = ref(storage, `uploads/${file.name}-${Date.now()}`);
+    await uploadBytes(fileRef, file);
+    const fileURL = await getDownloadURL(fileRef);
+
+    await addDoc(messagesRef, {
+      text: "", // no text
+      fileURL,
+      fileName: file.name,
+      uid: user.uid,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      timestamp: new Date(),
+    });
+  };
+
+  // Listen to messages
   useEffect(() => {
     const q = query(messagesRef, orderBy("timestamp"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -63,13 +108,6 @@ function ChatRoom() {
     return () => unsubscribe();
   }, []);
 
-  const googleColors = {
-    googleBlue: "#4285F4",
-    googleRed: "#EA4335",
-    googleYellow: "#FBBC05",
-    googleGreen: "#34A853",
-  };
-
   return (
     <>
       <div className="min-h-screen bg-gray-900 text-white">
@@ -78,17 +116,11 @@ function ChatRoom() {
             <>
               <Navbar />
               <div className="flex justify-center items-center pt-10 flex-col px-4 sm:px-8 lg:px-16">
-                <img src={logo} alt="no internet connections" width={200} />
-                <h1
-                  className="font-extrabold text-4xl sm:text-5xl md:text-6xl text-center py-10"
-                  style={{ fontFamily: "Roboto" }}
-                >
+                <img src={logo} alt="logo" width={200} />
+                <h1 className="font-extrabold text-4xl sm:text-5xl md:text-6xl text-center py-10" style={{ fontFamily: "Roboto" }}>
                   Welcome to Ayi Chat
                 </h1>
-                <h1
-                  className="font-extralight pb-10 text-xl sm:text-2xl"
-                  style={{ fontFamily: "arial" }}
-                >
+                <h1 className="font-extralight pb-10 text-xl sm:text-2xl" style={{ fontFamily: "arial" }}>
                   Your Space, Your Voice, Our Community.
                 </h1>
                 <div className="flex w-full justify-center">
@@ -97,13 +129,7 @@ function ChatRoom() {
                     className="flex items-center justify-center w-full sm:w-3/4 md:w-1/2 py-3 px-4 bg-white border border-gray-300 rounded-lg shadow-md hover:shadow-lg focus:outline-none"
                     style={{ boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)" }}
                   >
-                    {/* Google Logo */}
-                    <img
-                      src={googleimage}
-                      alt="Google logo"
-                      className="w-10 mr-3"
-                    />
-                    {/* Text */}
+                    <img src={googleimage} alt="Google logo" className="w-10 mr-3" />
                     <span className="text-gray-800 font-semibold text-lg">
                       Continue with Google
                     </span>
@@ -136,11 +162,7 @@ function ChatRoom() {
                     transition={{ delay: index * 0.1 }}
                   >
                     {msg.uid !== user?.uid && (
-                      <img
-                        src={msg.photoURL}
-                        alt="user profile"
-                        className="w-8 h-8 rounded-full"
-                      />
+                      <img src={msg.photoURL} alt="user profile" className="w-8 h-8 rounded-full" />
                     )}
 
                     <div
@@ -149,25 +171,59 @@ function ChatRoom() {
                       }`}
                     >
                       <span className="font-semibold">{msg.displayName}</span>
-                      <p>{msg.text}</p>
+                      {msg.text && <p>{msg.text}</p>}
+                      {msg.fileURL && (
+                        msg.fileURL.match(/\.(jpeg|jpg|gif|png)$/i) ? (
+                          <img src={msg.fileURL} alt={msg.fileName} className="mt-2 max-w-xs rounded" />
+                        ) : (
+                          <a href={msg.fileURL} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline block mt-2">
+                            📎 {msg.fileName}
+                          </a>
+                        )
+                      )}
                     </div>
 
                     {msg.uid === user?.uid && (
-                      <img
-                        src={msg.photoURL}
-                        alt="user profile"
-                        className="w-8 h-8 rounded-full"
-                      />
+                      <img src={msg.photoURL} alt="user profile" className="w-8 h-8 rounded-full" />
                     )}
                   </motion.div>
                 ))}
               </div>
 
-              {/* Message Input */}
-              <form
-                onSubmit={sendMessage}
-                className="flex items-center space-x-2 mt-4"
-              >
+              {/* Message Input, Emoji, Attachment */}
+              <form onSubmit={sendMessage} className="flex items-center space-x-2 mt-4 relative">
+                {/* Emoji Button */}
+                <button
+                  type="button"
+                  onClick={() => setShowEmojiPicker((prev) => !prev)}
+                  className="bg-gray-600 p-2 rounded-lg text-white hover:bg-gray-500 transition"
+                >
+                  😀
+                </button>
+
+                {/* Emoji Picker */}
+                {showEmojiPicker && (
+                  <div ref={emojiPickerRef} className="absolute bottom-16 left-0 z-50">
+                    <EmojiPicker onEmojiClick={handleEmojiClick} theme="dark" />
+                  </div>
+                )}
+
+                {/* Attachment */}
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current.click()}
+                  className="bg-gray-600 p-2 rounded-lg text-white hover:bg-gray-500 transition"
+                >
+                  📎
+                </button>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileChange}
+                  style={{ display: "none" }}
+                />
+
+                {/* Message Input */}
                 <input
                   type="text"
                   value={message}
@@ -175,6 +231,8 @@ function ChatRoom() {
                   className="flex-1 p-3 rounded-lg bg-gray-700 text-white"
                   placeholder="Type a message..."
                 />
+
+                {/* Send */}
                 <button
                   type="submit"
                   className="bg-blue-500 p-3 rounded-lg text-white hover:bg-blue-700 transition"
