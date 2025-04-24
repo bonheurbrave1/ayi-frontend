@@ -8,6 +8,7 @@ const Members = () => {
   const [displayedMembers, setDisplayedMembers] = useState([]);
   const [connections, setConnections] = useState({});
   const [connectedUsers, setConnectedUsers] = useState([]);
+  const [incomingRequests, setIncomingRequests] = useState([]); // For incoming requests
   const [loading, setLoading] = useState(true);
   const [showConnections, setShowConnections] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -34,6 +35,7 @@ const Members = () => {
 
         const currentUser = allUsers.find((user) => user._id === userId);
         const currentConnections = currentUser?.connections || [];
+        const currentIncomingRequests = currentUser?.incomingRequests || [];
 
         const connectionMap = {};
         const connected = [];
@@ -53,6 +55,7 @@ const Members = () => {
         setConnectedUsers(connected);
         setMembers(filteredUsers);
         setDisplayedMembers(filteredUsers.slice(0, PAGE_SIZE));
+        setIncomingRequests(currentIncomingRequests); // Set incoming requests
       } catch (error) {
         console.error('Failed to fetch users:', error);
       } finally {
@@ -111,6 +114,35 @@ const Members = () => {
   const closeModal = () => {
     setShowModal(false);
     setSelectedMember(null);
+  };
+
+  // Accept connection request
+  const acceptConnection = async (targetId) => {
+    try {
+      await axios.post(`/api/user/${userId}/accept`, { targetId });
+
+      // Remove from incoming requests and add to connections
+      setIncomingRequests((prev) => prev.filter((req) => req._id !== targetId));
+      const acceptedUser = members.find((m) => m._id === targetId);
+      if (acceptedUser) {
+        setConnectedUsers((prev) => [...prev, acceptedUser]);
+        setMembers((prev) => prev.filter((m) => m._id !== targetId));
+      }
+    } catch (error) {
+      console.error('Error accepting connection:', error);
+    }
+  };
+
+  // Reject connection request
+  const rejectConnection = async (targetId) => {
+    try {
+      await axios.post(`/api/user/${userId}/reject`, { targetId });
+
+      // Remove from incoming requests
+      setIncomingRequests((prev) => prev.filter((req) => req._id !== targetId));
+    } catch (error) {
+      console.error('Error rejecting connection:', error);
+    }
   };
 
   if (loading) {
@@ -188,6 +220,58 @@ const Members = () => {
           )}
         </div>
 
+        {/* Incoming Requests */}
+        <div className="mb-8">
+          <h3 className="text-2xl font-semibold text-gray-900 mb-4">Incoming Requests</h3>
+          <div className="bg-white rounded-md shadow-md p-4 max-h-72 overflow-y-auto">
+            {incomingRequests.length > 0 ? (
+              incomingRequests.map((member) => (
+                <div
+                  key={member._id}
+                  className="flex items-center justify-between py-2 border-b last:border-b-0"
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                      {member.profilePic ? (
+                        <img
+                          src={member.profilePic}
+                          alt={member.names}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <span className="text-white font-bold">
+                          {(member.names?.split(' ')[0]?.charAt(0) || '') +
+                            (member.names?.split(' ')[1]?.charAt(0) || '')}
+                        </span>
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-medium text-gray-800">{member.names}</p>
+                      <p className="text-sm text-gray-500">{member.email}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => acceptConnection(member._id)}
+                      className="bg-green-500 text-white text-xs px-3 py-1 rounded"
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={() => rejectConnection(member._id)}
+                      className="bg-red-500 text-white text-xs px-3 py-1 rounded"
+                    >
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-center text-gray-500">No incoming requests.</div>
+            )}
+          </div>
+        </div>
+
         {/* All Members List */}
         <div className="space-y-6">
           {filteredMembers.length > 0 ? (
@@ -224,7 +308,7 @@ const Members = () => {
 
                 <div className="mt-4 flex justify-end items-center gap-3">
                   <span className="text-sm text-gray-500">
-                    {connections[member._id] ? '1 Connection' : '0 Connections'}
+                    {/* {'1 Connection' } */}
                   </span>
                   <button
                     onClick={() => toggleConnection(member._id)}
@@ -266,17 +350,14 @@ const Members = () => {
             </button>
             <div className="flex flex-col items-center space-y-4">
               <img
-                src={selectedMember.profilePic || '/default-avatar.png'}
+                src={selectedMember.profilePic}
                 alt={selectedMember.names}
                 className="w-24 h-24 rounded-full object-cover"
               />
-              <h2 className="text-xl font-semibold">{selectedMember.names}</h2>
-              <p>Email: {selectedMember.email}</p>
-              <p>Phone: {selectedMember.phone}</p>
-              <p>VIP Class: {getVipCategory(selectedMember.wallet)}</p>
-              <button className="mt-4 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
-                Invite to Chat
-              </button>
+              <h3 className="text-2xl font-semibold">{selectedMember.names}</h3>
+              <p className="text-sm text-gray-500">{selectedMember.email}</p>
+              <p className="text-sm text-gray-500">{selectedMember.phone}</p>
+              <p className="font-semibold text-sm mt-3">{getVipCategory(selectedMember.wallet)}</p>
             </div>
           </div>
         </div>
