@@ -63,7 +63,7 @@ const LoginForm = () => {
 
           {/* Submit Button */}
           {/* real login functionalities */}
-          <Link to={"/ayi-community"}>
+          <Link to={"/ayi-sphere"}>
           <motion.button
             type="submit"
             className="w-full py-3 mt-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-200"

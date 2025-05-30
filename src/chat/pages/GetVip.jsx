@@ -63,7 +63,7 @@ const GetVip = () => {
 
   const handleOk = () => {
     setShowModal(false);
-    navigate('/ayi-wallet/wallet');
+    navigate('/account-page/ayi-wallet/wallet');
   };
 
   return (

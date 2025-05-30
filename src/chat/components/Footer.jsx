@@ -55,7 +55,7 @@ const Footer = () => {
 
         {/* Bottom Section - Copyright */}
         <div className="text-center mt-8 border-t border-gray-600 pt-6">
-          <p className="text-sm text-gray-400">© 2025 AYI-community. All rights reserved.</p>
+          <p className="text-sm text-gray-400">© 2025 AYI-Sphere. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -1,35 +1,36 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { FaUserAlt, FaWhatsapp } from "react-icons/fa"; // WhatsApp Icon
+import { FaUserAlt, FaWhatsapp } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isFixed, setIsFixed] = useState(false); // To track if navbar should be fixed
-  const dropdownRef = useRef(null); // Ref for dropdown menu
+  const [isFixed, setIsFixed] = useState(false);
+  const dropdownRef = useRef(null);
   const navigate = useNavigate();
-3
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  // Effect to handle scroll position
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setIsFixed(true); // Set navbar as fixed when scrolled
+        setIsFixed(true);
       } else {
-        setIsFixed(false); // Res3et when at the top of the page
+        setIsFixed(false);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    // Close the dropdown when clicking outside
     const handleClickOutside = (event) => {
-      // Only close if the click is outside the dropdown
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && !event.target.closest('button')) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !event.target.closest("button")
+      ) {
         setIsOpen(false);
       }
     };
@@ -38,14 +39,13 @@ const NavBar = () => {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      document.removeEventListener("click", handleClickOutside); // Clean up event listener
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
-  // Handle Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login"); // Redirect to login page after logout
+    navigate("/login");
   };
 
   const isLoggedIn = true;
@@ -87,20 +87,19 @@ const NavBar = () => {
           <div className="space-x-5 w-full text-xl text-black">
             {isLoggedIn ? (
               <>
-                <div className="relative float-right space-x-6 flex">
-                  <h1>Welcome Bonheur,</h1>
-                  <button className="focus:outline-none">
-                  <Link to={'/account-page'}>
-                    <FaUserAlt />
+                <div className="relative float-right space-x-6 flex items-center">
+                  <Link to="/account-page">
+                    <button className="bg-black text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 transition ease-in-out duration-300">
+                      Enter AYI Systems
+                    </button>
                   </Link>
-                  </button>
                 </div>
               </>
             ) : (
               <>
                 <div className="float-right space-x-6">
                   <Link to="/register">
-                    <button className="bg-black text-white  border-2 border-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 hover:border-blue-700 transition ease-in-out duration-300">
+                    <button className="bg-black text-white border-2 border-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 hover:border-blue-700 transition ease-in-out duration-300">
                       Register Now
                     </button>
                   </Link>
@@ -116,7 +115,6 @@ const NavBar = () => {
         </div>
       </motion.nav>
 
-      {/* Conditionally render the WhatsApp button */}
       {!isOpen && (
         <motion.div
           className="fixed hover:bg-green-500 top-20 right-4 bg-white text-black py-2 px-5 rounded-full shadow-lg cursor-pointer z-50 flex items-center space-x-3"

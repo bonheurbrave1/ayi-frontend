@@ -1,159 +1,159 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaHandshake, FaLightbulb, FaUserFriends, FaTools, FaDollarSign } from "react-icons/fa";
+import {
+  FaHandshake,
+  FaLightbulb,
+  FaUserFriends,
+  FaTools,
+  FaDollarSign,
+} from "react-icons/fa";
 import Tilt from "react-parallax-tilt";
+
+import parallaxHeader from "../assets/parallax2.jpg";
+import parallaxMission from "../assets/parallax1.jpg";
+import parallaxValues from "../assets/parallax1.jpg";
+import parallaxObjectives from "../assets/parallax2.jpg";
 
 const Objectives = () => {
   return (
-    <div className="bg-black text-white py-20 px-6">
-      {/* Header Section */}
-      <div className="text-center mb-16">
+    <div className="text-white">
+
+      {/* Header with Parallax Background */}
+      <div
+        className="h-[60vh] bg-fixed bg-center bg-cover flex items-center justify-center"
+        style={{ backgroundImage: `url(${parallaxHeader})` }}
+      >
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="text-5xl font-extrabold text-white"
+          className="text-5xl font-extrabold text-white text-center bg-black/50 px-6 py-4 rounded-lg"
         >
           Our Objectives
         </motion.h1>
       </div>
 
-      {/* Mission and Vision Section */}
-      <div className="grid md:grid-cols-2 gap-12">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-center p-8 bg-gray-900 shadow-lg rounded-lg hover:scale-105 transform transition"
-        >
-          <h2 className="text-3xl font-semibold text-white mb-4">Mission</h2>
-          <p className="text-lg text-gray-300">
-            To support youth in development through saving and investment.
-          </p>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-center p-8 bg-gray-900 shadow-lg rounded-lg hover:scale-105 transform transition"
-        >
-          <h2 className="text-3xl font-semibold text-white mb-4">Vision</h2>
-          <p className="text-lg text-gray-300">
-            To become the best development and investment company working with youth in the world.
-          </p>
-        </motion.div>
-      </div>
-
-      {/* Core Values Section */}
-      <div className="my-20">
-        <h2 className="text-4xl font-semibold text-center text-white mb-12">Our Core Values</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <Tilt
-            tiltMaxAngleX={15}
-            tiltMaxAngleY={15}
-            glareEnable={true}
-            glareMaxOpacity={0.5}
-            className="p-8 bg-gray-900 rounded-lg shadow-lg text-center hover:scale-105 transform transition"
+      {/* Mission and Vision with Parallax Background */}
+      <div
+        className="bg-fixed bg-center bg-cover py-24 px-6"
+        style={{ backgroundImage: `url(${parallaxMission})` }}
+      >
+        <div className="grid md:grid-cols-2 gap-12 bg-black/70 p-10 rounded-lg">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="text-center p-6 bg-gray-900 bg-opacity-80 rounded-lg shadow-lg"
           >
-            <FaHandshake className="text-5xl text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold text-white">Integrity</h3>
-            <p className="text-gray-300">We act with honesty and adhere to strong moral principles.</p>
-          </Tilt>
-          <Tilt
-            tiltMaxAngleX={15}
-            tiltMaxAngleY={15}
-            glareEnable={true}
-            glareMaxOpacity={0.5}
-            className="p-8 bg-gray-900 rounded-lg shadow-lg text-center hover:scale-105 transform transition"
+            <h2 className="text-3xl font-semibold mb-4">Mission</h2>
+            <p className="text-lg text-gray-300">
+              To support youth in development through saving and investment.
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="text-center p-6 bg-gray-900 bg-opacity-80 rounded-lg shadow-lg"
           >
-            <FaLightbulb className="text-5xl text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold text-white">Ambitious</h3>
-            <p className="text-gray-300">We are driven to achieve excellence and go beyond expectations.</p>
-          </Tilt>
-          <Tilt
-            tiltMaxAngleX={15}
-            tiltMaxAngleY={15}
-            glareEnable={true}
-            glareMaxOpacity={0.5}
-            className="p-8 bg-gray-900 rounded-lg shadow-lg text-center hover:scale-105 transform transition"
-          >
-            <FaUserFriends className="text-5xl text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold text-white">Accountability</h3>
-            <p className="text-gray-300">We take responsibility for our actions and commitments.</p>
-          </Tilt>
-          <Tilt
-            tiltMaxAngleX={15}
-            tiltMaxAngleY={15}
-            glareEnable={true}
-            glareMaxOpacity={0.5}
-            className="p-8 bg-gray-900 rounded-lg shadow-lg text-center hover:scale-105 transform transition"
-          >
-            <FaTools className="text-5xl text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold text-white">Creative Collaboration</h3>
-            <p className="text-gray-300">We encourage innovation and value teamwork in all our endeavors.</p>
-          </Tilt>
+            <h2 className="text-3xl font-semibold mb-4">Vision</h2>
+            <p className="text-lg text-gray-300">
+              To become the best development and investment company working with youth in the world.
+            </p>
+          </motion.div>
         </div>
       </div>
 
-      {/* Objectives Section */}
-      <div className="my-20">
-        <h2 className="text-4xl font-semibold text-center text-white mb-12">Our Key Objectives</h2>
-        <div className="grid md:grid-cols-2 gap-12">
-          {/* Profit Objective */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="p-8 bg-gray-900 rounded-lg shadow-lg hover:scale-105 transform transition"
-          >
-            <FaDollarSign className="text-4xl text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-4">Profit Objective</h3>
-            <p className="text-lg text-gray-300">
-              To achieve sufficient profit to finance our company growth and provide investment resources for future development.
-            </p>
-          </motion.div>
+      {/* Core Values with Parallax Background */}
+      <div
+        className="bg-fixed bg-center bg-cover py-24 px-6"
+        style={{ backgroundImage: `url(${parallaxValues})` }}
+      >
+        <div className="bg-black/70 p-10 rounded-lg">
+          <h2 className="text-4xl font-semibold text-center mb-12">Our Core Values</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: <FaHandshake className="text-5xl text-green-500 mb-4" />,
+                title: "Integrity",
+                desc: "We act with honesty and adhere to strong moral principles.",
+              },
+              {
+                icon: <FaLightbulb className="text-5xl text-green-500 mb-4" />,
+                title: "Ambitious",
+                desc: "We are driven to achieve excellence and go beyond expectations.",
+              },
+              {
+                icon: <FaUserFriends className="text-5xl text-green-500 mb-4" />,
+                title: "Accountability",
+                desc: "We take responsibility for our actions and commitments.",
+              },
+              {
+                icon: <FaTools className="text-5xl text-green-500 mb-4" />,
+                title: "Creative Collaboration",
+                desc: "We encourage innovation and value teamwork in all our endeavors.",
+              },
+            ].map((value, i) => (
+              <Tilt
+                key={i}
+                tiltMaxAngleX={15}
+                tiltMaxAngleY={15}
+                glareEnable={true}
+                glareMaxOpacity={0.5}
+                className="p-6 bg-gray-900 bg-opacity-80 rounded-lg shadow-lg text-center hover:scale-105 transform transition"
+              >
+                {value.icon}
+                <h3 className="text-xl font-semibold text-white">{value.title}</h3>
+                <p className="text-gray-300">{value.desc}</p>
+              </Tilt>
+            ))}
+          </div>
+        </div>
+      </div>
 
-          {/* Customer Objective */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="p-8 bg-gray-900 rounded-lg shadow-lg hover:scale-105 transform transition"
-          >
-            <FaUserFriends className="text-4xl text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-4">Customer Objective</h3>
-            <p className="text-lg text-gray-300">
-              To provide services and products of the highest quality and greatest possible value to our customers, thereby gaining and holding their respect and loyalty.
-            </p>
-          </motion.div>
-
-          {/* Technology Objective */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="p-8 bg-gray-900 rounded-lg shadow-lg hover:scale-105 transform transition"
-          >
-            <FaTools className="text-4xl text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-4">Technology Objective</h3>
-            <p className="text-lg text-gray-300">
-              To participate in fields of interest that build up on our technology and customer base, enabling continuous growth and profitable contributions.
-            </p>
-          </motion.div>
-
-          {/* Society Objective */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="p-8 bg-gray-900 rounded-lg shadow-lg hover:scale-105 transform transition"
-          >
-            <FaHandshake className="text-4xl text-green-500 mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-4">Society Objective</h3>
-            <p className="text-lg text-gray-300">
-              To honor our obligations to society by being an economic, intellectual, and social asset to each nation and community in which we operate.
-            </p>
-          </motion.div>
+      {/* Objectives with Parallax Background */}
+      <div
+        className="bg-fixed bg-center bg-cover py-24 px-6"
+        style={{ backgroundImage: `url(${parallaxObjectives})` }}
+      >
+        <div className="bg-black/70 p-10 rounded-lg">
+          <h2 className="text-4xl font-semibold text-center mb-12">Our Key Objectives</h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            {[
+              {
+                icon: <FaDollarSign className="text-4xl text-green-500 mb-4" />,
+                title: "Profit Objective",
+                desc: "To achieve sufficient profit to finance our company growth and provide investment resources for future development.",
+              },
+              {
+                icon: <FaUserFriends className="text-4xl text-green-500 mb-4" />,
+                title: "Customer Objective",
+                desc: "To provide services and products of the highest quality and greatest possible value to our customers, thereby gaining and holding their respect and loyalty.",
+              },
+              {
+                icon: <FaTools className="text-4xl text-green-500 mb-4" />,
+                title: "Technology Objective",
+                desc: "To participate in fields of interest that build up on our technology and customer base, enabling continuous growth and profitable contributions.",
+              },
+              {
+                icon: <FaHandshake className="text-4xl text-green-500 mb-4" />,
+                title: "Society Objective",
+                desc: "To honor our obligations to society by being an economic, intellectual, and social asset to each nation and community in which we operate.",
+              },
+            ].map((obj, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: index * 0.2 }}
+                className="p-6 bg-gray-900 bg-opacity-80 rounded-lg shadow-lg hover:scale-105 transform transition"
+              >
+                {obj.icon}
+                <h3 className="text-xl font-semibold text-white mb-2">{obj.title}</h3>
+                <p className="text-lg text-gray-300">{obj.desc}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

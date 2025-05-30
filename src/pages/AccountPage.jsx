@@ -58,7 +58,7 @@ const AccountPage = () => {
               </div>
             </Tilt>
           </Link>
-          <Link to={"/ayi-community"}>
+          <Link to={"/ayi-sphere"}>
             {/* Parallax Tilt Card 2 */}
 
             <Tilt
@@ -70,13 +70,13 @@ const AccountPage = () => {
             >
               <div className="bg-green-700 p-8 sm:p-6 md:p-8 rounded-xl text-center text-white w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
                 <FaUsers className="text-5xl mb-4 mx-auto" />
-                <h3 className="text-xl sm:text-2xl">Join the Community</h3>
+                <h3 className="text-xl sm:text-2xl">Join the AYI Sphere</h3>
               </div>
             </Tilt>
           </Link>
 
           {/* Parallax Tilt Card 3 */}
-          <Link to={"/ayi-wallet/wallet"}>
+          <Link to={"/ayi-wallet"}>
             <Tilt
               tiltMaxAngleX={20}
               tiltMaxAngleY={20}

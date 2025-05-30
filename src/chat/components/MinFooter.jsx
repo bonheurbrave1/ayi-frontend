@@ -39,7 +39,7 @@ const MinFooter = () => {
       <div className="max-w-6xl mx-auto">
         {/* FAQ Section */}
         <h2 className="text-3xl font-semibold mb-8 text-center text-gray-900">
-          Frequently Asked Questions
+         (FAQ) -  Frequently Asked Questions
         </h2>
         <div className="space-y-6">
           {faqs.map((faq, index) => (
