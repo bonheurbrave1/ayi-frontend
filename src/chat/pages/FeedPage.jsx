@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaThumbsUp, FaComment, FaShare } from 'react-icons/fa';
+import {
+  FaThumbsUp,
+  FaComment,
+  FaShare,
+  FaBookmark,
+  FaRegBookmark,
+  FaEye
+} from 'react-icons/fa';
 import axios from 'axios';
 
 const FeedPage = () => {
   const [posts, setPosts] = useState([]);
   const [commentInputs, setCommentInputs] = useState({});
+  const [bookmarked, setBookmarked] = useState([]);
 
-  // Example logged-in user ID (replace with real userId from auth)
   const userId = localStorage.getItem("userId");
+
   useEffect(() => {
     fetchPosts();
   }, []);
@@ -17,24 +25,47 @@ const FeedPage = () => {
     try {
       const res = await axios.get("http://localhost:5000/api/posts");
       setPosts(res.data.posts);
+      res.data.posts.forEach((post) => incrementView(post._id));
     } catch (error) {
       console.error("Error fetching posts:", error);
+    }
+  };
+
+  const incrementView = async (postId) => {
+    try {
+      await axios.put(`http://localhost:5000/api/posts/${postId}/view`);
+    } catch (error) {
+      console.error("Error updating view count:", error.message);
     }
   };
 
   const toggleLike = async (postId) => {
     try {
       const res = await axios.post(`http://localhost:5000/api/posts/${postId}/like`, { userId });
-      // Update the local state
       setPosts((prev) =>
         prev.map((post) =>
-          post._id === postId
-            ? { ...post, likes: res.data.likes }
-            : post
+          post._id === postId ? { ...post, likes: res.data.likes } : post
         )
       );
     } catch (error) {
       console.error("Error liking/unliking post:", error);
+    }
+  };
+
+  const toggleBookmark = (postId) => {
+    setBookmarked((prev) =>
+      prev.includes(postId) ? prev.filter((id) => id !== postId) : [...prev, postId]
+    );
+  };
+
+  const handleRepost = async (post) => {
+    try {
+      const res = await axios.post(`http://localhost:5000/api/posts/${post._id}/repost`, {
+        user: userId,
+      });
+      setPosts((prev) => [res.data.post, ...prev]);
+    } catch (error) {
+      console.error("Error reposting:", error.message);
     }
   };
 
@@ -53,7 +84,6 @@ const FeedPage = () => {
           post._id === postId ? { ...post, comments: res.data.comments } : post
         )
       );
-      // Clear the input
       setCommentInputs((prev) => ({ ...prev, [postId]: "" }));
     } catch (error) {
       console.error("Error posting comment:", error);
@@ -102,22 +132,40 @@ const FeedPage = () => {
               </div>
             )}
 
-            {/* Buttons */}
-            <div className="flex space-x-6 mt-4 text-gray-600">
+            {/* Interaction Buttons */}
+            <div className="flex space-x-6 mt-4 text-gray-600 flex-wrap">
               <div
                 className="flex items-center space-x-1 cursor-pointer hover:text-blue-600"
                 onClick={() => toggleLike(post._id)}
               >
                 <FaThumbsUp size={20} />
-                <span className="text-sm">{post.likes.length}</span>
+                <span className="text-sm">{post.likes?.length || 0}</span>
               </div>
+
               <div className="flex items-center space-x-1 cursor-pointer hover:text-blue-600">
                 <FaComment size={20} />
-                <span className="text-sm">{post.comments.length}</span>
+                <span className="text-sm">{post.comments?.length || 0}</span>
               </div>
-              <div className="flex items-center space-x-1 cursor-pointer hover:text-blue-600">
+
+              <div
+                className="flex items-center space-x-1 cursor-pointer hover:text-green-600"
+                onClick={() => handleRepost(post)}
+              >
                 <FaShare size={20} />
-                <span className="text-sm">0</span>
+                <span className="text-sm">Repost</span>
+              </div>
+
+              <div
+                className="flex items-center space-x-1 cursor-pointer hover:text-yellow-500"
+                onClick={() => toggleBookmark(post._id)}
+              >
+                {bookmarked.includes(post._id) ? <FaBookmark size={20} /> : <FaRegBookmark size={20} />}
+                <span className="text-sm">Bookmark</span>
+              </div>
+
+              <div className="flex items-center space-x-1">
+                <FaEye size={20} />
+                <span className="text-sm">{post.views || 1}</span>
               </div>
             </div>
 

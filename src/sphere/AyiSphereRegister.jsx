@@ -26,6 +26,9 @@ export default function AyiSphereRegister() {
     } catch (err) {
       if (err.response && err.response.data) {
         setError(err.response.data.message || "Registration failed");
+        if(err.response.data.message == "Email not registered in main user system"){
+          navigate("/register")
+        }
       } else {
         setError("Server error");
       }

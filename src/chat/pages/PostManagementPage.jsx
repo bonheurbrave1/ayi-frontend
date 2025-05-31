@@ -18,7 +18,7 @@ function PostManagementPage() {
   const [newPostImage, setNewPostImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [posts, setPosts] = useState([]);
-  const [bookmarked, setBookmarked] = useState([]); // local bookmarks
+  const [bookmarked, setBookmarked] = useState([]);
 
   const userId = localStorage.getItem("userId");
 
@@ -33,9 +33,12 @@ function PostManagementPage() {
   const fetchPosts = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/posts");
+
+      // Ensure user._id is a string before comparison
       const myPosts = res.data.posts
-        .filter((post) => post.user?._id === userId)
+        .filter((post) => String(post.user?._id) === String(userId))
         .map((post) => ({ ...post, liked: false }));
+
       setPosts(myPosts);
 
       // Track views for each post
@@ -125,7 +128,7 @@ function PostManagementPage() {
         Post Management
       </h1>
 
-      {/* Create Post */}
+      {/* Create Post Section */}
       <motion.div
         className="bg-white p-6 rounded-lg shadow-lg mb-8"
         initial={{ opacity: 0 }}

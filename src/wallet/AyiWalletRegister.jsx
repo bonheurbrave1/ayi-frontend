@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import logo from "../assets/logo.png";
 
 export default function AyiWalletRegister() {
   const [email, setEmail] = useState("");
@@ -24,6 +25,11 @@ export default function AyiWalletRegister() {
 
   return (
     <div className="min-h-screen bg-blue-950 flex items-center justify-center px-4">
+        <div className="absolute top-4 left-4">
+                        <a href={"/"}>
+                          <img src={logo} alt="AYI Group Logo" className="w-20 h-auto" />
+                        </a>
+                      </div>
       <form
         onSubmit={handleSubmit}
         className="bg-white/10 backdrop-blur-md p-8 rounded-xl shadow-xl max-w-md w-full text-white space-y-6"

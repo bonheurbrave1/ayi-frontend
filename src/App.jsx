@@ -22,6 +22,8 @@ import AyiSphereRegister from "./sphere/AyiSphereRegister";
 import WalletPage from "./pages/WalletPage";
 import LandingPage from "./pages/LandingPage";
 import Land from "./chat/pages/Land";
+import AyiWalletLogin from "./wallet/AyiWalletLogin";
+import AyiWalletRegister from "./wallet/AyiWalletRegister";
 
 // PrivateRoute component for protected routes
 const PrivateRoute = ({ element }) => {
@@ -35,6 +37,11 @@ const AyiSpherePrivateRoute = ({ element }) => {
   return token ? element : <Navigate to="/ayi-sphere/login" />;
 };
 
+const AyiWalletPrivateRoute = ({ element }) => {
+  const token = localStorage.getItem("ayi-wallet-token");
+  return token ? element : <Navigate to="/ayi-wallet/login" />;
+};
+
 function App() {
   return (
     <GoogleOAuthProvider clientId="project-833543702694">
@@ -43,14 +50,16 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegistrationPage />} />
-        <Route path="/ayi-sphere/login" element={<AyiSphereLogin />} />
-        <Route path="/ayi-sphere/register" element={<AyiSphereRegister />} />
+        <Route path="/ayi-sphere/login" element={ <PrivateRoute element={<AyiSphereLogin /> } /> } /> 
+        <Route path="/ayi-sphere/register" element={<PrivateRoute element={<AyiSphereRegister /> } />} />
+        <Route path="/ayi-wallet/login" element={ <PrivateRoute element={<AyiWalletLogin /> } /> } /> 
+        <Route path="/ayi-wallet/register" element={<PrivateRoute element={<AyiWalletRegister /> } />} />
 
         {/* Protected Routes with Normal Token */}
         <Route path="/account-page" element={<PrivateRoute element={<AccountPage />} />} />
         <Route path="/ayi-chat-room" element={<PrivateRoute element={<ChatRoom />} />} />
         <Route path="/ayi-wallet" element={<PrivateRoute element={<LandingPage />} />} />
-        <Route path="/ayi-wallet/wallet" element={<PrivateRoute element={<WalletPage />} />} />
+        <Route path="/ayi-wallet/wallet" element={<AyiWalletPrivateRoute element={<WalletPage />} />} />
 
         {/* Main Route protected with main token */}
         <Route path="/ayi-sphere" element={<PrivateRoute element={<Land />} />} />

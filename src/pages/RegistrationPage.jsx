@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUser, FaLock, FaEnvelope, FaPhoneAlt } from "react-icons/fa"; // React Icons
 import { motion } from "framer-motion";
 import { GoogleLogin } from "@react-oauth/google";
@@ -21,7 +21,7 @@ const RegistrationPage = () => {
   const [bd, setBD] = useState(""); // birthdate
   const [nationalId, setNationalId] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,14 +49,7 @@ const RegistrationPage = () => {
 
       // Show success message and reset form
       alert(response.data.message);
-      setFullnames("");
-      setEmail("");
-      setPhone("");
-      setPassword("");
-      setConfirmPassword("");
-      setLocation("");
-      setBD("");
-      setNationalId("");
+      navigate("/login")
     } catch (err) {
       // Handle error
       console.error("Registration error:", err.response?.data || err.message);

@@ -17,6 +17,9 @@
   import { useNavigate } from "react-router-dom";
 
   export default function WalletPage() {
+    const [fullname , setfullname] = useState("");
+    const [email , setemail] = useState("");
+    const [message,setmessage]= useState("");
     const [activeTab, setActiveTab] = useState("account");
     const [theme, setTheme] = useState("light");
     const [modalContent, setModalContent] = useState(null);
@@ -40,10 +43,9 @@
         description: "You have successfully logged out.",
       });
 
-      localStorage.clear();
+      localStorage.removeItem("ayi-wallet-token");
       sessionStorage.clear();
-
-      goto("/");
+      goto("/account-page");
     };
     const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
 
@@ -394,6 +396,7 @@
               <div>
                 <label className="block text-gray-700">Email</label>
                 <input
+                  onChange={(e)=>{setemail(e.target.value)}}
                   type="email"
                   className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                   placeholder="e.g. example@mail.com"
