@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { FaUsers, FaBullhorn, FaUserPlus, FaRegUserCircle } from "react-icons/fa";
+import {
+  FaUsers,
+  FaBullhorn,
+  FaUserPlus,
+  FaRegUserCircle,
+} from "react-icons/fa";
 import { RiMessage2Fill, RiVipCrownFill } from "react-icons/ri";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoMdCloudUpload } from "react-icons/io";
@@ -18,7 +23,7 @@ const Layout = () => {
       try {
         const res = await axios.get(`http://localhost:5000/api/user/${userId}`);
         setUser(res.data.user);
-        setFormData(res.data.user); // Pre-fill form with current user data
+        setFormData(res.data.user);
       } catch (err) {
         console.error("Failed to fetch user:", err);
       }
@@ -80,14 +85,31 @@ const Layout = () => {
       <div className="fixed top-0 left-0 w-64 h-full bg-white shadow-lg overflow-y-auto p-6">
         <div className="pb-7 text-center">
           <FaRegUserCircle className="mx-auto text-gray-300" size={40} />
-          <h1 className="text-sm font-extrabold py-2">{user?.names || "Loading..."}</h1>
-          <h1 className="text-sm text-gray-500">{user?.email || ""}</h1>
-          <span className={`mt-2 inline-block text-xs font-semibold px-3 py-1 rounded-full ${vipClass}`}>
-            {vipCategory}
-          </span>
+          {user ? (
+            <>
+              <h1 className="text-sm font-extrabold py-2">{user.names}</h1>
+              <h1 className="text-sm text-gray-500">{user.email}</h1>
+              <span
+                className={`mt-2 inline-block text-xs font-semibold px-3 py-1 rounded-full ${vipClass}`}
+              >
+                {vipCategory}
+              </span>
+            </>
+          ) : (
+            <>
+              <h1 className="text-sm font-extrabold py-2 animate-pulse">
+                Loading...
+              </h1>
+              <h1 className="text-sm text-gray-400 animate-pulse">
+                Fetching email...
+              </h1>
+              <span className="mt-2 inline-block text-xs font-semibold px-3 py-1 rounded-full bg-gray-300 text-gray-600 animate-pulse">
+                ...
+              </span>
+            </>
+          )}
         </div>
 
-        {/* Update Profile Button */}
         <div>
           <button
             onClick={handleUpdateProfile}
@@ -97,16 +119,79 @@ const Layout = () => {
           </button>
         </div>
 
-        {/* Sidebar Links */}
         <ul className="space-y-4 mt-8">
-          <li><Link to="feeds" className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"><FaUsers size={20} /><span>Feeds</span></Link></li>
-          <li><Link to="posts" className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"><IoMdCloudUpload size={20} /><span>Posts</span></Link></li>
-          <li><Link to="members" className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"><FaUsers size={20} /><span>Members</span></Link></li>
-          <li><Link to="messages" className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"><RiMessage2Fill size={20} /><span>Messages</span></Link></li>
-          <li><Link to="announcements" className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"><FaBullhorn size={20} /><span>Announcements</span></Link></li>
-          <li><Link to="creategroup" className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"><FaUserPlus size={20} /><span>Create Group</span></Link></li>
-          <li><Link to="getvip" className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"><RiVipCrownFill size={20} /><span>Get VIP+</span></Link></li>
-          <li><Link to="settings" className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"><IoSettingsOutline size={20} /><span>Settings</span></Link></li>
+          <li>
+            <Link
+              to="feeds"
+              className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"
+            >
+              <FaUsers size={20} />
+              <span>Feeds</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="posts"
+              className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"
+            >
+              <IoMdCloudUpload size={20} />
+              <span>Posts</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="members"
+              className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"
+            >
+              <FaUsers size={20} />
+              <span>Members</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="messages"
+              className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"
+            >
+              <RiMessage2Fill size={20} />
+              <span>Messages</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="announcements"
+              className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"
+            >
+              <FaBullhorn size={20} />
+              <span>Announcements</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="creategroup"
+              className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"
+            >
+              <FaUserPlus size={20} />
+              <span>Create Group</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="getvip"
+              className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"
+            >
+              <RiVipCrownFill size={20} />
+              <span>Get VIP+</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="settings"
+              className="flex items-center space-x-3 hover:bg-blue-100 p-3 rounded-md"
+            >
+              <IoSettingsOutline size={20} />
+              <span>Settings</span>
+            </Link>
+          </li>
         </ul>
       </div>
 
@@ -120,18 +205,66 @@ const Layout = () => {
       {showModal && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold mb-4 text-center">Update Profile</h2>
+            <h2 className="text-xl font-semibold mb-4 text-center">
+              Update Profile
+            </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <input name="names" value={formData.names || ""} onChange={handleChange} placeholder="Full Name" className="w-full border p-2 rounded" />
-              <input name="email" value={formData.email || ""} onChange={handleChange} placeholder="Email" className="w-full border p-2 rounded" />
-              <input name="phone" value={formData.phone || ""} onChange={handleChange} placeholder="Phone" className="w-full border p-2 rounded" />
-              <input name="location" value={formData.location || ""} onChange={handleChange} placeholder="Location" className="w-full border p-2 rounded" />
-              <input name="nationalId" value={formData.nationalId || ""} onChange={handleChange} placeholder="National ID" className="w-full border p-2 rounded" />
-              <input type="date" name="bd" value={formData.bd?.substring(0, 10) || ""} onChange={handleChange} className="w-full border p-2 rounded" />
-
+              <input
+                name="names"
+                value={formData.names || ""}
+                onChange={handleChange}
+                placeholder="Full Name"
+                className="w-full border p-2 rounded"
+              />
+              <input
+                name="email"
+                value={formData.email || ""}
+                onChange={handleChange}
+                placeholder="Email"
+                className="w-full border p-2 rounded"
+              />
+              <input
+                name="phone"
+                value={formData.phone || ""}
+                onChange={handleChange}
+                placeholder="Phone"
+                className="w-full border p-2 rounded"
+              />
+              <input
+                name="location"
+                value={formData.location || ""}
+                onChange={handleChange}
+                placeholder="Location"
+                className="w-full border p-2 rounded"
+              />
+              <input
+                name="nationalId"
+                value={formData.nationalId || ""}
+                onChange={handleChange}
+                placeholder="National ID"
+                className="w-full border p-2 rounded"
+              />
+              <input
+                type="date"
+                name="bd"
+                value={formData.bd?.substring(0, 10) || ""}
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+              />
               <div className="flex justify-end space-x-2 pt-4">
-                <button type="button" onClick={() => setShowModal(false)} className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400">Cancel</button>
-                <button type="submit" className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">Save</button>
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+                >
+                  Save
+                </button>
               </div>
             </form>
           </div>

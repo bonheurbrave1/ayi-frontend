@@ -59,16 +59,22 @@ const FeedPage = () => {
   };
 
   const handleRepost = async (post) => {
+    if (post.user?._id === userId) {
+      alert("You cannot repost your own post.");
+      return;
+    }
+  
     try {
       const res = await axios.post(`http://localhost:5000/api/posts/${post._id}/repost`, {
-        user: userId,
+        userId, // ✅ CORRECT
       });
       setPosts((prev) => [res.data.post, ...prev]);
     } catch (error) {
+      alert(error.response?.data?.error || "Error reposting post.");
       console.error("Error reposting:", error.message);
     }
   };
-
+  
   const postComment = async (postId) => {
     const text = commentInputs[postId];
     if (!text) return;
@@ -99,7 +105,16 @@ const FeedPage = () => {
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-3xl font-semibold text-gray-900 mb-6">Community Feed</h2>
-        <h1 className="font-bold border-b-4 border-b-blue-700 py-2">For you</h1>
+
+        <div className="flex items-center justify-between border-b-4 border-b-blue-700 py-2 mb-4">
+          <h1 className="font-bold text-lg">For you</h1>
+          <button
+            onClick={() => window.location.href = '/ayi-sphere/community/posts'}
+            className="bg-blue-600 text-white px-4 py-1.5 rounded-md font-semibold shadow hover:bg-blue-700 transition"
+          >
+            Post
+          </button>
+        </div>
 
         {posts.map((post) => (
           <motion.div
@@ -109,6 +124,11 @@ const FeedPage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
+            {/* Repost indicator */}
+            {post.originalPost && (
+              <p className="text-sm italic text-gray-500 mb-2">🔁 Reposted</p>
+            )}
+
             {/* User Info */}
             <div className="flex items-center mb-3">
               <div className="w-14 h-14 bg-blue-400 rounded-full flex items-center justify-center text-white font-bold mr-4">

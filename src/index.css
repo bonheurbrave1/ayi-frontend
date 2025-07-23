@@ -25,3 +25,12 @@
 .mtn {
   background-image: url("../src/assets/momo.jpeg");
 }
+
+
+
+
+
+
+html {
+  scroll-behavior: smooth;
+}

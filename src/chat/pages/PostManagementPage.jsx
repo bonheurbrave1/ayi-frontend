@@ -12,6 +12,7 @@ import {
 import { motion } from "framer-motion";
 import axios from "axios";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 function PostManagementPage() {
   const [newPostDescription, setNewPostDescription] = useState("");
@@ -19,7 +20,7 @@ function PostManagementPage() {
   const [imagePreview, setImagePreview] = useState(null);
   const [posts, setPosts] = useState([]);
   const [bookmarked, setBookmarked] = useState([]);
-
+  const navigate = useNavigate(); 
   const userId = localStorage.getItem("userId");
 
   useEffect(() => {
@@ -80,6 +81,7 @@ function PostManagementPage() {
       setNewPostDescription("");
       setNewPostImage(null);
       setImagePreview(null);
+      
     } catch (error) {
       console.error("Error creating post:", error.response?.data || error.message);
       alert("Failed to create post.");

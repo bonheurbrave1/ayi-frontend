@@ -231,6 +231,7 @@
       </section>
     );
   }
+  
   function DepositMoney({ openModal }) {
     return (
       <section className="space-y-4">
@@ -305,7 +306,7 @@
             </li>
             <li>
               Send the screenshot to this number:{" "}
-              <strong>+250 782 029 528</strong>.
+              <strong>+250 782 029 528 Registerd on Hakuzimana Paul</strong>.
             </li>
           </ul>
           <p className="mt-2">

@@ -12,13 +12,13 @@ import Objectives from "../components/Objectives";
 import ContactUs from "../components/ContactUs";
 
 const Homepage = () => {
-  // const value = localStorage.getItem("logged")
-  // const [logged , setlogged ] = useState("")
-  // if (value) setloge
-
   return (
     <div className="font-sans bg-gray-900 text-white">
       <Navbar />
+
+      {/* Home anchor point */}
+      <div id="home"></div>
+
       <section className="h-screen bg-cover bg-center relative hero">
         {/* Overlay */}
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
@@ -42,11 +42,19 @@ const Homepage = () => {
           </motion.button>
         </div>
       </section>
-      <Objectives />
-      <OurTeam />
 
-      <Insights />
-      <ContactUs />
+      <div id="about">
+        <Objectives />
+      </div>
+      <div id="team">
+        <OurTeam />
+      </div>
+      <div>
+        <Insights />
+      </div>
+      <div id="contact">
+        <ContactUs />
+      </div>
     </div>
   );
 };
