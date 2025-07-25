@@ -64,7 +64,7 @@ const ContactUs = () => {
                 <span className=" block">+250 788 967 462</span>
               </div>
             </li>
-            <Link to={"https://x.com/Afriyouthinves"} target="_blank">
+            <Link to={"mailto:afriyouthinvest@gmail.com"} target="_blank">
               <li className="flex items-center mb-2">
                 <FaEnvelope className="mr-4 text-green-500" />
                 afriyouthinvest@gmail.com

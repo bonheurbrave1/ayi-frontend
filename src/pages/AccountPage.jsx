@@ -44,7 +44,7 @@ const AccountPage = () => {
       <div className="py-20 bg-gray-800">
         <div className="flex flex-wrap justify-center items-center space-x-6 gap-8 sm:space-x-4 md:space-x-6 lg:space-x-8 xl:space-x-10">
           {/* Parallax Tilt Card 1 */}
-          <Link to={"/ayi-chat-room"}>
+          <Link to={"/ayi-chat-room"} target="_blank">
             <Tilt
               tiltMaxAngleX={20}
               tiltMaxAngleY={20}
@@ -58,7 +58,7 @@ const AccountPage = () => {
               </div>
             </Tilt>
           </Link>
-          <Link to={"/ayi-sphere"}>
+          <Link to={"/ayi-sphere"} target="_blank">
             {/* Parallax Tilt Card 2 */}
 
             <Tilt
@@ -76,7 +76,7 @@ const AccountPage = () => {
           </Link>
 
           {/* Parallax Tilt Card 3 */}
-          <Link to={"/ayi-wallet"}>
+          <Link to={"/ayi-wallet"} target="_blank">
             <Tilt
               tiltMaxAngleX={20}
               tiltMaxAngleY={20}
