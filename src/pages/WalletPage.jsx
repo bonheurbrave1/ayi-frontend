@@ -204,6 +204,7 @@ function InfoCard({ title, children, onClick }) {
 function AccountInformation({ openModal }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  console.log(user);
 
   const transaction_details =
     "Transaction not permitted. Your account does not currently meet the minimum requirement for this type of transaction. Users must have at least 1 year of active membership in the system to proceed.";
@@ -235,11 +236,13 @@ function AccountInformation({ openModal }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <InfoCard
           title="Balance Details"
-          onClick={() =>
+          onClick={() =>{
+            console.log(user);
             openModal({
               title: "Balance Details",
-              description: `1. Account Holder: ${user.names}\n2. Account balance: ${user.wallet?.balance || "0"} FRW\n3. Type of VIP: ${user.wallet?.vip || "N/A"}\n4. Loan allowed: up to ${user.wallet?.loanLimit || "0"}`,
+              description: `1. Account Holder: ${user.names}\n2. Account balance: ${user.wallet} \n3.  Type of VIP: ${user.wallet?.vip || "N/A"}\n4. Loan allowed: up to ${user.wallet?.loanLimit || "0"}`,
             })
+          }
           }
         >
           Current balance and available funds.
