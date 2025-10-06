@@ -118,7 +118,7 @@ function ChatRoom() {
               <div className="flex justify-center items-center pt-10 flex-col px-4 sm:px-8 lg:px-16">
                 <img src={logo} alt="logo" width={200} />
                 <h1 className="font-extrabold text-4xl sm:text-5xl md:text-6xl text-center py-10" style={{ fontFamily: "Roboto" }}>
-                  Welcome to Ayi Chat
+                  Welcome to A Chat
                 </h1>
                 <h1 className="font-extralight pb-10 text-xl sm:text-2xl" style={{ fontFamily: "arial" }}>
                   Your Space, Your Voice, Our Community.

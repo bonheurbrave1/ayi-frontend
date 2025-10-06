@@ -4,7 +4,7 @@ import { FaUserAlt, FaWhatsapp } from "react-icons/fa";
 import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+const   NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFixed, setIsFixed] = useState(false);
   const dropdownRef = useRef(null);
@@ -44,6 +44,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.clear()
     navigate("/login");
   };
 
@@ -91,44 +92,8 @@ const NavBar = () => {
             </div>
           </div>
         </Link>
-
-          {/* Navigation Links */}
-          <div className="flex items-center space-x-8 text-sm font-semibold text-black">
-            <button onClick={() => scrollToSection("home")} className="hover:text-blue-600 transition">
-              Home
-            </button>
-            <button onClick={() => scrollToSection("about")} className="hover:text-blue-600 transition">
-              About
-            </button>
-            <button onClick={() => scrollToSection("team")} className="hover:text-blue-600 transition">
-              OurTeam
-            </button>
-            <button onClick={() => scrollToSection("contact")} className="hover:text-blue-600 transition">
-              Contact Us
-            </button>
-
-            {isLoggedIn ? (
-              <Link to="/account-page">
-                <button className="bg-black text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 transition ease-in-out duration-300">
-                  Enter AYI Systems
-                </button>
-              </Link>
-            ) : (
-              <>
-                <Link to="/register">
-                  <button className="bg-black text-white border-2 border-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 hover:border-blue-700 transition ease-in-out duration-300">
-                    Register Now
-                  </button>
-                </Link>
-                <Link to="/login">
-                  <button className="bg-black text-white border-2 border-black px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700 hover:border-blue-700 transition ease-in-out duration-300">
-                    Sign in
-                  </button>
-                </Link>
-              </>
-            )}
-          </div>
         </div>
+
       </motion.nav>
 
       {/* WhatsApp Contact Button */}

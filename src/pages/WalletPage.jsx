@@ -33,7 +33,6 @@ export default function WalletPage() {
     { id: "account", label: "Account Information", icon: <FaUser /> },
     { id: "deposit", label: "Deposit Money", icon: <FaMoneyBillWave /> },
     { id: "vip", label: "Claim VIP", icon: <FaCrown /> },
-    { id: "profile", label: "User Profile", icon: <FaUser /> },
     { id: "support", label: "Support", icon: <MdOutlineContactSupport /> },
     { id: "settings", label: "Settings", icon: <FaCog /> },
   ];
@@ -51,6 +50,7 @@ export default function WalletPage() {
     });
     localStorage.removeItem("ayi-wallet-token");
     sessionStorage.clear();
+    localStorage.clear();
     goto("/account-page");
   };
 
@@ -144,7 +144,7 @@ export default function WalletPage() {
             </button>
             <button
               onClick={toggleTheme}
-              className="p-3 bg-gray-700 text-white rounded-lg"
+              className="p-3 bg-gray-700  text-white rounded-lg"
             >
               Toggle {theme === "light" ? "Dark" : "Light"} Theme
             </button>
@@ -304,7 +304,7 @@ function DepositMoney({ openModal }) {
             openModal({
               title: "Airtel Money",
               description:
-                "To deposit using Airtel Money:\n1. Dial *500#\n2. Select 'Send Money'\n3. Enter business number: 0782029528\n4. Use MEMO code in reference\n5. Confirm and send",
+                "To deposit using Airtel Money:\n1. Dial *500#\n2. Select 'Send Money'\n3. Enter business number: +250 735 250 928\n4. Use MEMO code in reference\n5. Confirm and send",
             })
           }
           className="bg-slate-600 relative bg-cover bg-center p-8 min-h-[180px] flex flex-col justify-between m-2 rounded-3xl shadow-xl text-white cursor-pointer hover:shadow-2xl border border-gray-200 dark:border-gray-700"
@@ -368,50 +368,6 @@ function DepositMoney({ openModal }) {
 
 function ClaimVIP({ openModal }) {
   return <GetVip />;
-}
-
-function UserProfile({ openModal, fullname, email }) {
-  return (
-    <section className="space-y-4">
-      <h2 className="text-3xl font-semibold">User Profile</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <InfoCard
-          title="Account ID"
-          onClick={() =>
-            openModal({
-              title: "Account ID",
-              description: "Your unique ID for transactions: #123456789",
-            })
-          }
-        >
-          #123456789
-        </InfoCard>
-        <InfoCard
-          title="User Information"
-          onClick={() =>
-            openModal({
-              title: "User Information",
-              description: `Name: ${fullname}\nEmail: ${email}\nPhone: +250000000000`,
-            })
-          }
-        >
-          View your personal information.
-        </InfoCard>
-        <InfoCard
-          title="Edit Profile"
-          onClick={() =>
-            openModal({
-              title: "Edit Profile",
-              description:
-                "You can change your profile info from here. (Edit form coming soon!)",
-            })
-          }
-        >
-          Update your profile details.
-        </InfoCard>
-      </div>
-    </section>
-  );
 }
 
 const Support = () => {

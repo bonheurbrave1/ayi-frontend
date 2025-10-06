@@ -136,7 +136,7 @@ const MemberCard = ({ member, index }) => (
 
 const OurTeam = () => {
   return (
-    <div className="bg-black text-white min-h-screen p-8">
+    <div className="bg-black text-white min-h-screen p-8" id='ourteam'>
       <motion.h1
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -34,3 +34,12 @@
 html {
   scroll-behavior: smooth;
 }
+
+
+
+.backgroundSection {
+  background-image: linear-gradient(rgba(22, 80, 87, 0.765)), url('./assets/back.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}

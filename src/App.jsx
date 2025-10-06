@@ -24,6 +24,7 @@ import LandingPage from "./pages/LandingPage";
 import Land from "./chat/pages/Land";
 import AyiWalletLogin from "./wallet/AyiWalletLogin";
 import AyiWalletRegister from "./wallet/AyiWalletRegister";
+import ResetPassword from "./pages/ResetPassword";
 
 // PrivateRoute component for protected routes
 const PrivateRoute = ({ element }) => {
@@ -49,6 +50,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/register" element={<RegistrationPage />} />
         <Route path="/ayi-sphere/login" element={ <PrivateRoute element={<AyiSphereLogin /> } /> } /> 
         <Route path="/ayi-sphere/register" element={<PrivateRoute element={<AyiSphereRegister /> } />} />

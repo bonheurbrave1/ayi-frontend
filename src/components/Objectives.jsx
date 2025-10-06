@@ -16,21 +16,14 @@ import parallaxObjectives from "../assets/parallax2.jpg";
 
 const Objectives = () => {
   return (
-    <div className="text-white">
+    <div className="text-white" id="about">
 
       {/* Header with Parallax Background */}
       <div
-        className="h-[60vh] bg-fixed bg-center bg-cover flex items-center justify-center"
+        className="h-[20vh] bg-fixed bg-center bg-cover flex items-center justify-center"
         style={{ backgroundImage: `url(${parallaxHeader})` }}
       >
-        <motion.h1
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-5xl font-extrabold text-white text-center bg-black/50 px-6 py-4 rounded-lg"
-        >
-          Our Objectives
-        </motion.h1>
+        <h1 className=" text-white text-3xl font-bold">Objectives</h1>
       </div>
 
       {/* Mission and Vision with Parallax Background */}

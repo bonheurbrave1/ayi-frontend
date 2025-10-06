@@ -34,6 +34,7 @@ const Settings = () => {
   const handleLogout = () => {
     localStorage.removeItem("ayi-sphere-token");
     sessionStorage.clear();
+    localStorage.clear();
     goto("/account-page");
   };
 

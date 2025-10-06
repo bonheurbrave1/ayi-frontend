@@ -53,7 +53,7 @@ export default function Land() {
       {/* Header */}
       <div className="flex items-center space-x-4 mb-10">
         <img src={logo} alt="Community Logo" className="w-16 h-16 object-contain drop-shadow-lg" />
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-wide">Ayi Sphere</h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-wide">A Sphere</h1>
       </div>
 
       {/* Subtitle */}
