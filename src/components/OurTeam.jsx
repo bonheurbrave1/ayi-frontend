@@ -81,7 +81,7 @@ const teamMembers = [
   },
   {
     name: 'Rukundo Dieudonne',
-    role: 'AYI Investment director',
+    role: 'AYI Group director',
     bio: 'Creative strategist, bringing fresh and innovative ideas to inspire the youth market.',
     email: 'rukudieu12@gmail.com',
     phone: '+250785063133',

@@ -14,8 +14,7 @@ const Footer = () => {
                 <img src={logo} alt="AYI Investments Logo" className="w-full h-full object-contain" />
               </div>
               <div>
-                <div className="font-bold text-lg">AYI Investments</div>
-                <div className="text-sm opacity-90">Group</div>
+                <div className="font-bold text-lg">AYI Group</div>
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
@@ -88,7 +87,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-start">
                 <FaMapMarkerAlt className="w-4 h-4 mt-1 mr-3 text-blue-400" />
-                <p className="text-gray-400 text-sm">123 AYI investment Street , Kigali Kibagabaga</p>
+                <p className="text-gray-400 text-sm">Rwanda - Kigali, Kibagabaga</p>
               </div>
               <div className="flex items-center">
                 <FaPhone className="w-4 h-4 mr-3 text-blue-400" />
@@ -128,7 +127,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            © {new Date().getFullYear()} AYI Investments Group. All rights reserved.
+            © {new Date().getFullYear()} AYI Group. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <a href="#" className="text-gray-500 hover:text-blue-400 text-sm transition-colors">Privacy Policy</a>

@@ -33,8 +33,7 @@ const Navbar = ({ isScrolled }) => {
             <img src={logo} alt="logo" className="w-full h-full object-contain" />
           </div>
           <div className="text-white">
-            <div className="font-bold text-sm sm:text-lg">AYI Investments</div>
-            <div className="text-xs sm:text-sm opacity-90">Group</div>
+            <div className="font-bold text-sm sm:text-lg">AYI Group</div>
           </div>
         </div>
         
