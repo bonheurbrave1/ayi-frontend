@@ -21,7 +21,7 @@ const Layout = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/user/${userId}`);
+        const res = await axios.get(`https://ayi-backend.onrender.com/api/user/${userId}`);
         setUser(res.data.user);
         setFormData(res.data.user);
       } catch (err) {
@@ -69,7 +69,7 @@ const Layout = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/user/${userId}`, formData);
+      await axios.put(`https://ayi-backend.onrender.com/api/user/${userId}`, formData);
       alert("Profile updated successfully!");
       setShowModal(false);
       window.location.reload();

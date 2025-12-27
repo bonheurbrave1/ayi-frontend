@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {toast , Toaster} from "sonner"
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://ayi-backend.onrender.com";
 const ContactUs = () => {
   const [name, setname] = useState("");
   const [email, setemail] = useState("");

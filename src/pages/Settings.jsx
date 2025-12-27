@@ -45,7 +45,7 @@ const Settings = () => {
   const handleEmailUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/user/${userId}/${email}`, { email });
+      await axios.put(`https://ayi-backend.onrender.com/api/user/${userId}/${email}`, { email });
       alert("Email updated successfully.");
       setShowEmailModal(false);
       window.location.reload();
@@ -58,7 +58,7 @@ const Settings = () => {
   const handlePasswordUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/user/${userId}/password`, passwords);
+      await axios.put(`https://ayi-backend.onrender.com/api/user/${userId}/password`, passwords);
       alert("Password updated successfully.");
       setShowPasswordModal(false);
     } catch (error) {

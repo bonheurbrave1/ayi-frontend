@@ -33,7 +33,7 @@ function PostManagementPage() {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/posts");
+      const res = await axios.get("https://ayi-backend.onrender.com/api/posts");
 
       // Ensure user._id is a string before comparison
       const myPosts = res.data.posts
@@ -51,7 +51,7 @@ function PostManagementPage() {
 
   const incrementView = async (postId) => {
     try {
-      await axios.put(`http://localhost:5000/api/posts/${postId}/view`);
+      await axios.put(`https://ayi-backend.onrender.com/api/posts/${postId}/view`);
     } catch (error) {
       console.error("Error updating view count:", error.message);
     }
@@ -73,7 +73,7 @@ function PostManagementPage() {
     if (newPostImage) formData.append("image", newPostImage);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/posts", formData, {
+      const res = await axios.post("https://ayi-backend.onrender.com/api/posts", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -90,7 +90,7 @@ function PostManagementPage() {
 
   const handleDeletePost = async (postId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/posts/${postId}`);
+      await axios.delete(`https://ayi-backend.onrender.com/api/posts/${postId}`);
       setPosts(posts.filter((post) => post._id !== postId));
     } catch (error) {
       console.error("Error deleting post:", error.response?.data || error.message);
@@ -114,7 +114,7 @@ function PostManagementPage() {
 
   const handleRepost = async (post) => {
     try {
-      const res = await axios.post(`http://localhost:5000/api/posts/${post._id}/repost`, {
+      const res = await axios.post(`https://ayi-backend.onrender.com/api/posts/${post._id}/repost`, {
         user: userId,
       });
       setPosts([{ ...res.data.post, liked: false }, ...posts]);

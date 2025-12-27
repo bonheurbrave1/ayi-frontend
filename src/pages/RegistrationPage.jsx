@@ -8,7 +8,7 @@ import business from "../assets/login/increase.png";
 import axios from "axios";
 
 // Set base URL for Axios
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://ayi-backend.onrender.com";
 
 const RegistrationPage = () => {
   // State variables for all form inputs

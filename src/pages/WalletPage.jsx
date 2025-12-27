@@ -5,7 +5,7 @@ import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import axios from "axios";
 import { toast, Toaster } from "sonner";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://ayi-backend.onrender.com";
 import {
   FaUser,
   FaMoneyBillWave,
@@ -215,7 +215,7 @@ function AccountInformation({ openModal }) {
         const userId = localStorage.getItem("userId");
         if (!userId) return;
 
-        const res = await axios.get(`http://localhost:5000/api/user/${userId}`);
+        const res = await axios.get(`https://ayi-backend.onrender.com/api/user/${userId}`);
         setUser(res.data.user);
       } catch (err) {
         console.error("Failed to fetch user:", err);

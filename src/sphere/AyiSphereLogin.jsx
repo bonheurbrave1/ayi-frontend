@@ -5,7 +5,7 @@ import axios from "axios"
 import logo from "../assets/logo.png";
 
 
-axios.defaults.baseURL = "http://localhost:5000"
+axios.defaults.baseURL = "https://ayi-backend.onrender.com"
 
 export default function AyiSphereLogin() {
   const [email, setEmail] = useState("");

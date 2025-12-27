@@ -23,7 +23,7 @@ const FeedPage = () => {
 
   const fetchPosts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/posts");
+      const res = await axios.get("https://ayi-backend.onrender.com/api/posts");
       setPosts(res.data.posts);
       res.data.posts.forEach((post) => incrementView(post._id));
     } catch (error) {
@@ -33,7 +33,7 @@ const FeedPage = () => {
 
   const incrementView = async (postId) => {
     try {
-      await axios.put(`http://localhost:5000/api/posts/${postId}/view`);
+      await axios.put(`https://ayi-backend.onrender.com/api/posts/${postId}/view`);
     } catch (error) {
       console.error("Error updating view count:", error.message);
     }
@@ -41,7 +41,7 @@ const FeedPage = () => {
 
   const toggleLike = async (postId) => {
     try {
-      const res = await axios.post(`http://localhost:5000/api/posts/${postId}/like`, { userId });
+      const res = await axios.post(`https://ayi-backend.onrender.com/api/posts/${postId}/like`, { userId });
       setPosts((prev) =>
         prev.map((post) =>
           post._id === postId ? { ...post, likes: res.data.likes } : post
@@ -65,7 +65,7 @@ const FeedPage = () => {
     }
   
     try {
-      const res = await axios.post(`http://localhost:5000/api/posts/${post._id}/repost`, {
+      const res = await axios.post(`https://ayi-backend.onrender.com/api/posts/${post._id}/repost`, {
         userId, // ✅ CORRECT
       });
       setPosts((prev) => [res.data.post, ...prev]);
@@ -80,7 +80,7 @@ const FeedPage = () => {
     if (!text) return;
 
     try {
-      const res = await axios.post(`http://localhost:5000/api/posts/${postId}/comment`, {
+      const res = await axios.post(`https://ayi-backend.onrender.com/api/posts/${postId}/comment`, {
         userId,
         text,
       });
