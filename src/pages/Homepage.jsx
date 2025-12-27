@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaUsers, FaRocket, FaRegHandPointUp, FaBars, FaTimes } from "react-icons/fa"; // Icons
 import { motion } from "framer-motion";
 import { GoogleLogin } from "@react-oauth/google";
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import business from "../assets/login/increase.png";
 import About from "../components/About";
@@ -190,13 +191,15 @@ const Homepage = () => {
                       
                       {/* Button with hover effect */}
                       <div className="pt-4 lg:pt-6">
+                      <Link to={"/login"}>
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                           className="bg-white md:bg-blue-600 text-blue-600 md:text-white hover:bg-blue-50 md:hover:bg-blue-700 py-3 px-8 rounded-lg text-sm sm:text-base lg:text-lg font-semibold transition duration-300 ease-in-out shadow-lg hover:shadow-xl w-full sm:w-auto max-w-xs mx-auto md:mx-0"
-                        >
+                          >
                           Get Started
                         </motion.button>
+                          </Link>
                       </div>
                     </div>
                   </div>
