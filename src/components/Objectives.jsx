@@ -17,7 +17,6 @@ import parallaxObjectives from "../assets/parallax2.jpg";
 const Objectives = () => {
   return (
     <div className="text-white" id="about">
-
       {/* Header with Parallax Background */}
       <div
         className="h-[20vh] bg-fixed bg-center bg-cover flex items-center justify-center"
@@ -40,7 +39,11 @@ const Objectives = () => {
           >
             <h2 className="text-3xl font-semibold mb-4">Mission</h2>
             <p className="text-lg text-gray-300">
-              To support youth in development through saving and investment.
+              We are committed to equipping young people with financial tools,
+              investment opportunities and entrepreneurial support they need to
+              build wealth and achieve financial independence. By fostering a
+              culture of smart saving and investment, we empower the next
+              generation to shape Africa’s economic future.
             </p>
           </motion.div>
           <motion.div
@@ -51,7 +54,11 @@ const Objectives = () => {
           >
             <h2 className="text-3xl font-semibold mb-4">Vision</h2>
             <p className="text-lg text-gray-300">
-              To become the best development and investment company working with youth in the world.
+              We envision of a future where African youth lead the way in
+              financial empowerment, turning their dreams into sustainable
+              investment and thriving business through smart investment, capital
+              ventures, we aimed to drive economic growth and creating
+              opportunity.
             </p>
           </motion.div>
         </div>
@@ -63,7 +70,9 @@ const Objectives = () => {
         style={{ backgroundImage: `url(${parallaxValues})` }}
       >
         <div className="bg-black/70 p-10 rounded-lg">
-          <h2 className="text-4xl font-semibold text-center mb-12">Our Core Values</h2>
+          <h2 className="text-4xl font-semibold text-center mb-12">
+            Our Core Values
+          </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
@@ -77,7 +86,9 @@ const Objectives = () => {
                 desc: "We are driven to achieve excellence and go beyond expectations.",
               },
               {
-                icon: <FaUserFriends className="text-5xl text-green-500 mb-4" />,
+                icon: (
+                  <FaUserFriends className="text-5xl text-green-500 mb-4" />
+                ),
                 title: "Accountability",
                 desc: "We take responsibility for our actions and commitments.",
               },
@@ -96,7 +107,9 @@ const Objectives = () => {
                 className="p-6 bg-gray-900 bg-opacity-80 rounded-lg shadow-lg text-center hover:scale-105 transform transition"
               >
                 {value.icon}
-                <h3 className="text-xl font-semibold text-white">{value.title}</h3>
+                <h3 className="text-xl font-semibold text-white">
+                  {value.title}
+                </h3>
                 <p className="text-gray-300">{value.desc}</p>
               </Tilt>
             ))}
@@ -110,7 +123,9 @@ const Objectives = () => {
         style={{ backgroundImage: `url(${parallaxObjectives})` }}
       >
         <div className="bg-black/70 p-10 rounded-lg">
-          <h2 className="text-4xl font-semibold text-center mb-12">Our Key Objectives</h2>
+          <h2 className="text-4xl font-semibold text-center mb-12">
+            Our Key Objectives
+          </h2>
           <div className="grid md:grid-cols-2 gap-12">
             {[
               {
@@ -119,7 +134,9 @@ const Objectives = () => {
                 desc: "To achieve sufficient profit to finance our company growth and provide investment resources for future development.",
               },
               {
-                icon: <FaUserFriends className="text-4xl text-green-500 mb-4" />,
+                icon: (
+                  <FaUserFriends className="text-4xl text-green-500 mb-4" />
+                ),
                 title: "Customer Objective",
                 desc: "To provide services and products of the highest quality and greatest possible value to our customers, thereby gaining and holding their respect and loyalty.",
               },
@@ -142,7 +159,9 @@ const Objectives = () => {
                 className="p-6 bg-gray-900 bg-opacity-80 rounded-lg shadow-lg hover:scale-105 transform transition"
               >
                 {obj.icon}
-                <h3 className="text-xl font-semibold text-white mb-2">{obj.title}</h3>
+                <h3 className="text-xl font-semibold text-white mb-2">
+                  {obj.title}
+                </h3>
                 <p className="text-lg text-gray-300">{obj.desc}</p>
               </motion.div>
             ))}
