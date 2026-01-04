@@ -18,7 +18,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Empowering Africa's youth through strategic investments and financial education. 
+              Empowering Africa's youth  and financial education. 
               Building a future where young people thrive through saving and investment.
             </p>
             <div className="flex space-x-4 pt-2">

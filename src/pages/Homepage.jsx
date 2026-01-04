@@ -182,7 +182,7 @@ const Homepage = () => {
                     {/* Mobile: White text on blue background, Desktop: Dark text on light background */}
                     <div className="space-y-4 lg:space-y-6 text-center md:text-left">
                       <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-white md:text-gray-900">
-                        Empowering Africa's Youth Through Investment
+                        Empowering Africa's Youth
                       </h1>
                       <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 md:text-gray-700 leading-relaxed max-w-2xl mx-auto md:mx-0">
                         Join us in creating a future where youth thrive through saving and investment.
