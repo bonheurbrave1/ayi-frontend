@@ -81,7 +81,7 @@ const ContactUs = () => {
               </li>
             </Link>
             <li className="flex items-center mb-2">
-              <FaLinkedinIn className="mr-4 text-blue-700" />
+              <FaLinkedinIn className="mr-4 text-blue-500" />
               <Link
                 to={
                   "https://www.linkedin.com/in/afriyouthinvest?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"

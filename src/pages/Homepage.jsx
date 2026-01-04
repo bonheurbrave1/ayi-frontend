@@ -185,7 +185,7 @@ const Homepage = () => {
                         Empowering Africa's Youth
                       </h1>
                       <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 md:text-gray-700 leading-relaxed max-w-2xl mx-auto md:mx-0">
-                        Join us in creating a future where youth thrive through saving and investment.
+                        Join us in creating a future where youth thrive
                       </p>
                       
                       {/* Button with hover effect */}
